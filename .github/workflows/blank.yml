@@ -30,9 +30,9 @@ jobs:
         uses: ./.github/actions/extract_version
 
       - name: Debug outputs
-      run: |
-        echo "All outputs:"
-        echo "${{ toJson(steps.version.outputs) }}"
+        run: |
+          echo "All outputs:"
+          echo "${{ toJson(steps.version.outputs) }}"
 
       - name: Show version
         run: echo "Version is ${{ steps.version.outputs.version }}"
