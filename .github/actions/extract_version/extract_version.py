@@ -4,6 +4,8 @@ import sys
 
 PACKAGE_XML = os.path.join(os.getcwd(), "package.xml")  # repo root
 
+print(f"Reading version from {PACKAGE_XML}")
+
 try:
     tree = ET.parse(PACKAGE_XML)
     root = tree.getroot()
@@ -11,6 +13,7 @@ try:
     if version_elem is None:
         raise ValueError("No <version> tag found")
     version = version_elem.text.strip()
+    print("Extracted version:", version)
 except Exception as e:
     print(f"Error extracting version: {e}", file=sys.stderr)
     sys.exit(1)
