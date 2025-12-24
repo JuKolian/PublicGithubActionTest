@@ -11,3 +11,14 @@ runs:
     - name: Run version extractor
       run: python3 ${{ github.action_path }}/extract_version.py
       shell: bash
+
+    - name: Set step output
+      run: |
+        VERSION=$(cat version.txt)
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - name: Debug outputs
+      run: |
+        echo "All outputs:"
+        echo "${{ toJson(steps.version.outputs) }}"
