@@ -34,3 +34,10 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+
+      - name: Extract version
+        id: version
+        uses: ./.github/actions/extract-version
+
+      - name: Show version
+        run: echo "Version is ${{ steps.version.outputs.version }}"

@@ -1,0 +1,13 @@
+name: Extract package.xml version
+description: Extracts the <version> tag from package.xml
+
+outputs:
+  version:
+    description: Extracted version from package.xml
+
+runs:
+  using: composite
+  steps:
+    - name: Run version extractor
+      run: python3 ${{ github.action_path }}/extract_version.py
+      shell: bash
