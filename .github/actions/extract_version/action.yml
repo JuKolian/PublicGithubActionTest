@@ -1,5 +1,5 @@
 name: Extract package.xml version
-description: Extracts the <version> tag from package.xml
+description: Extract <version> tag from package.xml
 
 outputs:
   version:
@@ -8,7 +8,7 @@ outputs:
 runs:
   using: composite
   steps:
-    - name: Run version extractor
+    - name: Run Python version extractor
       run: python3 ${{ github.action_path }}/extract_version.py
       shell: bash
 
@@ -17,8 +17,3 @@ runs:
         VERSION=$(cat version.txt)
         echo "version=$VERSION" >> $GITHUB_OUTPUT
       shell: bash
-
-    - name: Debug outputs
-      run: |
-        echo "All outputs:"
-        echo "${{ toJson(steps.version.outputs) }}"
