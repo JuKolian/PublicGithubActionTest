@@ -27,7 +27,9 @@ jobs:
 
       - name: Extract version
         id: version
-        uses: ./.github/actions/extract_version
+        run: |
+          python3 ./.github/actions/extract_version/extract_version.py > version.txt
+          echo "version=$(cat version.txt)" >> $GITHUB_OUTPUT
 
       - name: Debug outputs
         run: |

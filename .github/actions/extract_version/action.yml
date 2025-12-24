@@ -9,6 +9,7 @@ runs:
   using: composite
   steps:
     - name: Run Python version extractor
+      id: version
       run: python3 ${{ github.action_path }}/extract_version.py
       shell: bash
 
