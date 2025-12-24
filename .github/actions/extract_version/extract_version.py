@@ -2,9 +2,7 @@ import xml.etree.ElementTree as ET
 import os
 import sys
 
-PACKAGE_XML = os.path.join(os.getcwd(), "package.xml")  # repo root
-
-print(f"Reading version from {PACKAGE_XML}")
+PACKAGE_XML = os.path.join(os.getcwd(), "package.xml")
 
 try:
     tree = ET.parse(PACKAGE_XML)
@@ -13,10 +11,8 @@ try:
     if version_elem is None:
         raise ValueError("No <version> tag found")
     version = version_elem.text.strip()
-    print("Extracted version:", version)
 except Exception as e:
     print(f"Error extracting version: {e}", file=sys.stderr)
     sys.exit(1)
 
-with open("version.txt", "w") as f:
-    f.write(version)
+print(version)
