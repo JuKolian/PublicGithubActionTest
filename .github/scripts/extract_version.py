@@ -16,3 +16,6 @@ except Exception as e:
     sys.exit(1)
 
 print(version)
+
+with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+    f.write(f"version={version}\n")

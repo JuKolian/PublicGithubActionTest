@@ -27,14 +27,7 @@ jobs:
 
       - name: Extract version
         id: version
-        run: |
-          python3 ./.github/scripts/extract_version.py > version.txt
-          echo "version=$(cat version.txt)" >> $GITHUB_OUTPUT
-
-      - name: Debug outputs
-        run: |
-          echo "All outputs:"
-          echo "${{ toJson(steps.version.outputs) }}"
+        run: python3 ./.github/actions/extract_version/extract_version.py
 
       - name: Show version
         run: echo "Version is ${{ steps.version.outputs.version }}"
