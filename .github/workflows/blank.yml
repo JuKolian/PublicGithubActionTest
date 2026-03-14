@@ -23,3 +23,43 @@ jobs:
           echo "Full version: ${{ steps.version.outputs.version_full }}"
           echo "Major.Minor: ${{ steps.version.outputs.version_minor }}"
           echo "Major only: ${{ steps.version.outputs.version_major }}"
+
+      - name: Tag versions
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          # Extracted versions
+          FULL="${{ steps.version.outputs.version_full }}"
+          MINOR="${{ steps.version.outputs.version_minor }}"
+          MAJOR="${{ steps.version.outputs.version_major }}"
+
+          echo "Full version: $FULL"
+          echo "Minor version: $MINOR"
+          echo "Major version: $MAJOR"
+
+          # Always create/move full version tag
+          git tag -f "$FULL"
+
+          # Handle minor version tag
+          LAST_MINOR_TAG=$(git tag --list "$MINOR" | sort -V | tail -n1)
+          if [ "$LAST_MINOR_TAG" != "$MINOR" ]; then
+            echo "Creating new minor tag $MINOR"
+            git tag "$MINOR"
+          else
+            echo "Updating existing minor tag $MINOR"
+            git tag -f "$MINOR"
+          fi
+
+          # Handle major version tag
+          LAST_MAJOR_TAG=$(git tag --list "$MAJOR" | sort -V | tail -n1)
+          if [ "$LAST_MAJOR_TAG" != "$MAJOR" ]; then
+            echo "Creating new major tag $MAJOR"
+            git tag "$MAJOR"
+          else
+            echo "Updating existing major tag $MAJOR"
+            git tag -f "$MAJOR"
+          fi
+
+          # Push all tags
+          git push origin --tags --force
