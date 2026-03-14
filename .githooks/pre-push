@@ -1,3 +1,5 @@
 #!/bin/sh
 # Fetch tags from origin and overwrite local tags
 git fetch origin --tags -f
+
+echo "testststst"
