@@ -15,7 +15,7 @@ except Exception as e:
     print(f"Error extracting version: {e}", file=sys.stderr)
     sys.exit(1)
 
-print(version)
+print(f"Extracted version: {version}")
 
 with open(os.environ["GITHUB_OUTPUT"], "a") as f:
     f.write(f"version={version}\n")
