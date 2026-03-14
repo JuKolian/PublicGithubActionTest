@@ -2,4 +2,4 @@
 # Fetch tags from origin and overwrite local tags
 git fetch origin --tags -f
 
-echo "testststst"
+echo "$(date) pre-push hook executed" >> ~/.git-hooks.log
