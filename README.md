@@ -1,4 +1,4 @@
-2.2.3
+2.3.0
 
 githooks setzen:
 git config core.hooksPath .githooks
